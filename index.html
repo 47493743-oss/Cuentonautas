@@ -3,71 +3,631 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cuentonautas | Libros infantiles</title>
-  <meta name="description" content="Tienda gratuita de libros infantiles: cuentos para colorear, aprendizaje temprano y más. Descarga digital o envío físico.">
+  <title>Cuentonautas | Librería digital de cuentos infantiles en PDF</title>
+  <meta name="description" content="Compra y descarga inmediata de cuentos infantiles en PDF. Packs temáticos, guías para padres y material educativo listo para imprimir." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
+    :root {
       --bg: #fffdf8;
       --primary: #2ea5ff;
       --secondary: #f7c873;
+      --accent: #f9735b;
       --ink: #1f2937;
       --muted: #6b7280;
       --card: #ffffff;
-      --shadow: 0 12px 30px rgba(31,41,55,.06);
+      --shadow: 0 12px 30px rgba(31, 41, 55, .06);
       --radius: 18px;
     }
-    html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
-    .wrap{max-width:1100px;margin:0 auto;padding:20px}
-    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:rgba(255,253,248,.85);border-bottom:1px solid rgba(0,0,0,.04);z-index:50}
-    .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
-    .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#91d3ff);display:grid;place-items:center;color:white;font-weight:700;box-shadow:var(--shadow)}
-    .brand span{font-family:Fredoka,system-ui,sans-serif;font-size:1.15rem;font-weight:700}
-    nav a{margin-left:16px;text-decoration:none;color:var(--ink);font-weight:600}
-    nav a:hover{color:var(--primary)}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:28px 0}
-    .h-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
-    h1{font-family:Fredoka,system-ui,sans-serif;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.1;margin:0 0 10px}
-    .lead{color:var(--muted);font-size:1.05rem}
-    .cta{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:2px solid var(--primary);background:var(--primary);color:white;font-weight:700;text-decoration:none}
-    .btn.alt{background:transparent;color:var(--primary)}
-    .hero-illustration{position:relative}
-    .sun{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffeaa7, #f7c873);box-shadow:0 8px 30px rgba(247,200,115,.45);position:absolute;top:0;left:8%;}
-    .cloud{position:absolute;background:white;border-radius:999px;box-shadow:var(--shadow)}
-    .cloud.one{width:190px;height:60px;top:150px;left:0}
-    .cloud.two{width:140px;height:50px;top:210px;left:180px}
-    .book{position:absolute;right:0;bottom:0;width:62%;aspect-ratio:4/3;background:linear-gradient(135deg,#fff,#f5f7fb);border-radius:22px;border:6px solid #e6ecf7;box-shadow:var(--shadow);display:grid;place-items:center}
-    .book::before{content:"";width:78%;height:14px;background:#e6ecf7;border-radius:9px;position:absolute;top:18%}
-    .book::after{content:"";width:78%;height:14px;background:#e6ecf7;border-radius:9px;position:absolute;top:36%}
-    .section{padding:24px 0}
-    .section h2{font-family:Fredoka,system-ui,sans-serif;font-size:1.6rem;margin:0 0 14px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-    .thumb{aspect-ratio:4/3;background:#f3f4f6;display:grid;place-items:center;font-weight:700;color:#9ca3af;font-size:1.1rem}
-    .card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
-    .price{font-weight:800;color:#0f766e}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(46,165,255,.12);color:var(--primary);font-weight:700;font-size:.8rem}
-    .card-actions{margin-top:auto;display:flex;gap:8px}
-    .buy{flex:1;text-align:center;text-decoration:none;background:var(--primary);color:white;padding:10px;border-radius:12px;font-weight:700}
-    .try{flex:1;text-align:center;text-decoration:none;border:2px solid var(--primary);color:var(--primary);padding:8px;border-radius:12px;font-weight:700;background:white}
-    .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .about .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
-    footer{margin-top:40px;padding:24px 0;border-top:1px solid rgba(0,0,0,.06);color:var(--muted)}
-    .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
-    .social a{text-decoration:none;margin-right:14px;color:var(--muted)}
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr 1fr}
-      .about{grid-template-columns:1fr}
-      .book{width:78%}
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
     }
-    @media (max-width: 560px){
-      .grid{grid-template-columns:1fr}
-      nav{display:none}
+
+    a { color: inherit; }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: saturate(180%) blur(10px);
+      background: rgba(255, 253, 248, .9);
+      border-bottom: 1px solid rgba(0, 0, 0, .04);
+      z-index: 50;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), #91d3ff);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .brand span {
+      font-family: Fredoka, system-ui, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 16px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    input,
+    select,
+    textarea {
+      border-radius: 12px;
+      border: 1px solid rgba(31, 41, 55, .15);
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: white;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 165, 255, .18);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    main {
+      padding-bottom: 60px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 32px;
+      align-items: center;
+      padding: 32px 0;
+    }
+
+    .h-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+    }
+
+    h1 {
+      font-family: Fredoka, system-ui, sans-serif;
+      font-size: clamp(2rem, 3.2vw, 3.4rem);
+      line-height: 1.05;
+      margin: 0 0 16px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 18px;
+    }
+
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--primary);
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .btn span {
+      font-size: 1.2rem;
+    }
+
+    .btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .btn.alt {
+      background: white;
+      color: var(--primary);
+    }
+
+    .hero-note {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+      color: var(--muted);
+    }
+
+    .hero-note svg {
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .hero-illustration {
+      position: relative;
+      min-height: 320px;
+    }
+
+    .sun {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffeaa7, #f7c873);
+      box-shadow: 0 8px 30px rgba(247, 200, 115, .45);
+      position: absolute;
+      top: 0;
+      left: 8%;
+    }
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .cloud.one { width: 190px; height: 60px; top: 150px; left: 0; }
+    .cloud.two { width: 140px; height: 50px; top: 210px; left: 180px; }
+
+    .book {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 64%;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #fff, #f5f7fb);
+      border-radius: 22px;
+      border: 6px solid #e6ecf7;
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section h2 {
+      font-family: Fredoka, system-ui, sans-serif;
+      font-size: 1.8rem;
+      margin: 0 0 16px;
+    }
+
+    .section p {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+    }
+
+    .thumb {
+      aspect-ratio: 4 / 3;
+      background: #f3f4f6;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #9ca3af;
+      font-size: 1.1rem;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-body h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .price {
+      font-weight: 800;
+      color: #0f766e;
+      font-size: 1.1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(46, 165, 255, .12);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    .badge.alt {
+      background: rgba(249, 115, 91, .12);
+      color: var(--accent);
+    }
+
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .buy {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      background: var(--primary);
+      color: white;
+      padding: 11px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .buy:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .try {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 9px;
+      border-radius: 12px;
+      font-weight: 700;
+      background: white;
+      transition: .2s ease;
+    }
+
+    .try:hover {
+      background: rgba(46, 165, 255, .08);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature strong {
+      font-family: Fredoka, system-ui, sans-serif;
+      font-size: 1.05rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(46, 165, 255, .14);
+      color: var(--primary);
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+
+    .purchase {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .order-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .order-card h3 {
+      margin: 0;
+      font-family: Fredoka, system-ui, sans-serif;
+    }
+
+    .order-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f766e;
+    }
+
+    .order-includes {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .order-note {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .bundle {
+      background: linear-gradient(135deg, #2ea5ff, #7ac5ff);
+      color: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .bundle h3 {
+      margin: 0;
+      font-family: Fredoka, system-ui, sans-serif;
+      font-size: 1.6rem;
+    }
+
+    .bundle ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.6;
+    }
+
+    .bundle .btn {
+      border-color: white;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .testimonial {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .testimonial cite {
+      font-weight: 700;
+      color: var(--ink);
+      font-style: normal;
+    }
+
+    .faq {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    details {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    summary {
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(0, 0, 0, .06);
+      color: var(--muted);
+    }
+
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .social a {
+      text-decoration: none;
+      margin-right: 14px;
+      color: var(--muted);
+    }
+
+    .guarantee {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      background: rgba(15, 118, 110, .12);
+      padding: 18px;
+      border-radius: var(--radius);
+      color: #0f5132;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .about .panel {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .about h3 {
+      margin: 0;
+      font-family: Fredoka, system-ui, sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .pay-logos {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 1020px) {
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .purchase { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr 1fr; }
+      .faq { grid-template-columns: 1fr; }
+      .bundle { grid-template-columns: 1fr; }
+      .book { width: 78%; }
+      .about { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .features { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      nav { display: none; }
     }
   </style>
 </head>
@@ -80,7 +640,12 @@
       </a>
       <nav>
         <a href="#catalogo">Catálogo</a>
+        <a href="#muestras">Muestras</a>
+        <a href="#comprar">Compra rápida</a>
         <a href="#sobre">Sobre mí</a>
+        <a href="#paquetes">Paquetes</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -88,13 +653,16 @@
   <main class="wrap">
     <section class="hero" id="inicio">
       <div class="h-card">
-        <h1>Libros infantiles que inspiran curiosidad ✨</h1>
-        <p class="lead">Cuentos para colorear, aprendizaje temprano y recursos creativos hechos con cariño.</p>
+        <h1>Libros infantiles en PDF listos para descargar y aprender ✨</h1>
+        <p class="lead">Cuentos ilustrados, cuadernos de actividades y guías para familias educadoras. Descarga inmediata, material imprimible y soporte personalizado.</p>
         <div class="cta">
-          <a class="btn" href="#catalogo">Ver catálogo</a>
-          <a class="btn alt" href="#contacto">Hablemos</a>
+          <a class="btn" href="#catalogo"><span>🛒</span> Comprar ahora</a>
+          <a class="btn alt" href="#muestras"><span>👀</span> Ver muestras gratis</a>
         </div>
-        <div style="margin-top:14px"><span class="badge">Nuevos</span> <span class="badge" style="background:rgba(247,200,115,.18);color:#b7791f">Edades 1–7</span></div>
+        <div class="hero-note">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z"></path></svg>
+          <span>Pagos seguros por Yape, Plin y tarjetas · Entrega digital al instante</span>
+        </div>
       </div>
       <div class="hero-illustration" aria-hidden="true">
         <div class="sun"></div>
@@ -103,43 +671,381 @@
         <div class="book">📚</div>
       </div>
     </section>
+
+    <section class="section" id="comprar">
+      <h2>Compra rápida en minutos</h2>
+      <p>Completa tus datos, elige el PDF y confirma tu pedido. Te responderemos con el enlace de pago o descarga inmediata.</p>
+      <div class="purchase">
+        <form id="order-form">
+          <label>
+            Nombre y apellido
+            <input type="text" name="name" autocomplete="name" placeholder="Ej: Mariana Torres" required />
+          </label>
+          <label>
+            Correo electrónico
+            <input type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required />
+          </label>
+          <label>
+            Selecciona tu material PDF
+            <select name="product" id="product-select" required>
+              <option value="sol" data-price="12" data-title="Mi día con el Sol" data-summary="PDF imprimible · 24 páginas" data-whats="https://wa.me/51999999999">Mi día con el Sol · S/ 12.00</option>
+              <option value="oceano" data-price="18" data-title="Exploradores del océano" data-summary="PDF interactivo · 32 páginas" data-whats="https://wa.me/51999999999">Exploradores del océano · S/ 18.00</option>
+              <option value="abecedario" data-price="15" data-title="Abecedario mágico" data-summary="Cuaderno imprimible · 40 páginas" data-whats="https://wa.me/51999999999">Abecedario mágico · S/ 15.00</option>
+              <option value="pack" data-price="39" data-title="Pack Aventureros Curiosos" data-summary="3 PDFs + guía y playlist" data-whats="https://wa.me/51999999999">Pack Aventureros Curiosos · S/ 39.00</option>
+            </select>
+          </label>
+          <label>
+            Método de pago preferido
+            <select name="payment" required>
+              <option value="Yape">Yape</option>
+              <option value="Plin">Plin</option>
+              <option value="Transferencia">Transferencia bancaria</option>
+              <option value="Tarjeta">Tarjeta de crédito/débito</option>
+            </select>
+          </label>
+          <label>
+            Comentarios o requerimientos
+            <textarea name="message" placeholder="Cuéntanos si necesitas factura o si es un regalo"></textarea>
+          </label>
+          <button type="submit" class="btn" id="order-submit"><span>💬</span> Confirmar por WhatsApp</button>
+          <p class="order-note">No se realizarán cargos automáticos. Recibirás un mensaje con instrucciones de pago seguro y el enlace de descarga.</p>
+        </form>
+        <aside class="order-card" aria-live="polite">
+          <h3>Resumen del pedido</h3>
+          <div>
+            <strong id="order-title">Mi día con el Sol</strong>
+            <p class="muted" id="order-summary">PDF imprimible · 24 páginas</p>
+          </div>
+          <div class="order-price" id="order-price">S/ 12.00</div>
+          <ul class="order-includes" id="order-includes">
+            <li>Descarga inmediata en PDF</li>
+            <li>Actualizaciones gratuitas de por vida</li>
+            <li>Acompañamiento por WhatsApp</li>
+          </ul>
+          <div class="guarantee" style="margin-top:8px">
+            <span style="font-size:1.6rem">🔐</span>
+            <div>
+              <strong>Pagos verificados</strong>
+              <p style="margin:6px 0 0" class="muted">Validamos cada comprobante para enviarte el enlace correcto y personalizado.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
     <section class="section" id="catalogo">
-      <h2>Catálogo</h2>
+      <h2>Catálogo destacado</h2>
+      <p>Selecciona tus favoritos, recíbelos en segundos y disfruta de material listo para imprimir.</p>
       <div class="grid">
         <article class="card">
-          <div class="thumb">Portada "Señor Sol"</div>
+          <span class="badge">Más vendido</span>
+          <div class="thumb">Portada "Mi día con el Sol"</div>
           <div class="card-body">
             <h3>Mi día con el Sol (para colorear)</h3>
-            <p class="muted">PDF imprimible • 24 páginas • 3+</p>
+            <p class="muted">PDF imprimible · 24 páginas · Edades 3-6</p>
             <strong class="price">S/ 12.00</strong>
+            <ul class="muted" style="margin:0;padding-left:18px;line-height:1.5">
+              <li>Actividades para explorar emociones</li>
+              <li>Incluye guía para familias</li>
+            </ul>
             <div class="card-actions">
-              <a class="buy" href="#" target="_blank" rel="noopener">Comprar</a>
+              <a class="buy" href="https://wa.me/51999999999?text=Quiero%20comprar%20Mi%20día%20con%20el%20Sol" target="_blank" rel="noopener">Comprar PDF</a>
               <a class="try" href="#muestra-sol">Ver muestra</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <span class="badge alt">Nuevo</span>
+          <div class="thumb">Portada "Exploradores del océano"</div>
+          <div class="card-body">
+            <h3>Exploradores del océano</h3>
+            <p class="muted">PDF interactivo · 32 páginas · Edades 5-8</p>
+            <strong class="price">S/ 18.00</strong>
+            <ul class="muted" style="margin:0;padding-left:18px;line-height:1.5">
+              <li>Experimentos sencillos para casa</li>
+              <li>Audio cuento incluido</li>
+            </ul>
+            <div class="card-actions">
+              <a class="buy" href="https://wa.me/51999999999?text=Quiero%20comprar%20Exploradores%20del%20océano" target="_blank" rel="noopener">Comprar PDF</a>
+              <a class="try" href="#muestras">Escuchar demo</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">Portada "Abecedario mágico"</div>
+          <div class="card-body">
+            <h3>Abecedario mágico</h3>
+            <p class="muted">Cuaderno imprimible · 40 páginas · Edades 4-7</p>
+            <strong class="price">S/ 15.00</strong>
+            <ul class="muted" style="margin:0;padding-left:18px;line-height:1.5">
+              <li>Traza, colorea y recorta</li>
+              <li>Incluye tarjetas recortables</li>
+            </ul>
+            <div class="card-actions">
+              <a class="buy" href="https://wa.me/51999999999?text=Quiero%20comprar%20Abecedario%20mágico" target="_blank" rel="noopener">Comprar PDF</a>
+              <a class="try" href="#muestras">Ver interior</a>
             </div>
           </div>
         </article>
       </div>
     </section>
-    <section class="section about" id="sobre">
-      <div class="panel">
-        <h2>Sobre mí</h2>
-        <p>¡Hola! Soy Sarita Zuñiga, creadora de material infantil con enfoque lúdico y pedagógico.</p>
-      </div>
-      <div class="panel">
-        <h2>Cómo comprar</h2>
-        <p>Elige un producto y haz clic en Comprar. Recibirás el PDF al instante.</p>
+
+    <section class="section" id="muestras">
+      <h2>Muestras gratuitas</h2>
+      <p>Descarga algunas páginas de muestra y comprueba la calidad antes de comprar.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">Preview PDF "Mi día con el Sol"</div>
+          <div class="card-body">
+            <h3 id="muestra-sol">Mi día con el Sol</h3>
+            <p class="muted">Incluye portada + 3 actividades para imprimir.</p>
+            <div class="card-actions">
+              <a class="buy" href="https://example.com/muestra-sol.pdf" target="_blank" rel="noopener">Descargar muestra</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">Preview PDF "Exploradores del océano"</div>
+          <div class="card-body">
+            <h3>Exploradores del océano</h3>
+            <p class="muted">Incluye ficha interactiva y rompecabezas imprimible.</p>
+            <div class="card-actions">
+              <a class="buy" href="https://example.com/muestra-oceano.pdf" target="_blank" rel="noopener">Descargar muestra</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb">Preview PDF "Abecedario mágico"</div>
+          <div class="card-body">
+            <h3>Abecedario mágico</h3>
+            <p class="muted">Incluye 5 letras ilustradas para practicar.</p>
+            <div class="card-actions">
+              <a class="buy" href="https://example.com/muestra-abecedario.pdf" target="_blank" rel="noopener">Descargar muestra</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
+
+    <section class="section" aria-labelledby="beneficios">
+      <h2 id="beneficios">¿Por qué elegir Cuentonautas?</h2>
+      <div class="features">
+        <div class="feature">
+          <strong>Descarga inmediata</strong>
+          <p>Recibe tus archivos PDF al instante en tu correo o WhatsApp. Nada de esperas.</p>
+        </div>
+        <div class="feature">
+          <strong>Uso flexible</strong>
+          <p>Imprime las veces que desees para tu familia o aula. Diseños nítidos y listos para usar.</p>
+        </div>
+        <div class="feature">
+          <strong>Enfoque pedagógico</strong>
+          <p>Cada cuento está creado por educadoras con objetivos de aprendizaje claros y divertidos.</p>
+        </div>
+        <div class="feature">
+          <strong>Soporte dedicado</strong>
+          <p>Te acompañamos después de la compra con ideas, actualizaciones gratuitas y talleres.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <h2>Sobre Cuentonautas</h2>
+      <div class="about">
+        <div class="panel">
+          <h3>Quién está detrás</h3>
+          <p>Soy Sarita Zuñiga, educadora y escritora que crea experiencias de lectura con enfoque lúdico y emocional.</p>
+          <p>Me apasiona acompañar a familias y docentes con recursos listos para disfrutar en casa o en el aula.</p>
+        </div>
+        <div class="panel">
+          <h3>Cómo funciona la compra</h3>
+          <p>Elige tu libro o pack, realiza el pago por Yape, Plin, transferencia o tarjeta y recibe un enlace de descarga inmediata.</p>
+          <p>Guardamos tu compra para que puedas volver a descargarla cuando lo necesites.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="paquetes">
+      <h2>Paquetes y promociones</h2>
+      <div class="bundle">
+        <div>
+          <h3>Pack Aventureros Curiosos</h3>
+          <p style="color:rgba(255,255,255,.85)">Incluye 3 libros en PDF + guía para familias + playlist de audio cuentos.</p>
+          <ul>
+            <li>Mi día con el Sol</li>
+            <li>Exploradores del océano</li>
+            <li>Abecedario mágico</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:1.8rem;margin:0 0 14px;font-weight:700">S/ 39.00</p>
+          <p style="margin:0 0 18px;color:rgba(255,255,255,.85)">Ahorra S/ 6.00 y recibe actualizaciones futuras sin costo.</p>
+          <a class="btn" href="https://wa.me/51999999999?text=Quiero%20el%20Pack%20Aventureros%20Curiosos" target="_blank" rel="noopener">Reservar pack</a>
+        </div>
+      </div>
+      <div class="steps" style="margin-top:24px">
+        <div class="step">
+          <div class="step-number">1</div>
+          <strong>Elige tu PDF</strong>
+          <p class="muted">Selecciona el libro individual o pack que más se adapte a tu peque.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <strong>Realiza el pago</strong>
+          <p class="muted">Aceptamos Yape, Plin, transferencias y tarjetas. Envíanos tu comprobante.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <strong>Recibe y disfruta</strong>
+          <p class="muted">Te enviamos el enlace de descarga inmediata y futuras actualizaciones.</p>
+        </div>
+      </div>
+      <div class="pay-logos" aria-label="Métodos de pago disponibles">
+        <span>Yape</span>
+        <span>Plin</span>
+        <span>Transferencia BCP</span>
+        <span>Tarjeta Visa/Mastercard</span>
+      </div>
+    </section>
+
+    <section class="section" id="opiniones">
+      <h2>Opiniones de familias felices</h2>
+      <div class="testimonial-grid">
+        <figure class="testimonial">
+          <blockquote>“Mi hija espera cada semana las actividades de Cuentonautas. Son creativas y fáciles de imprimir en casa.”</blockquote>
+          <cite>Mariela · Mamá de Valentina (4)</cite>
+        </figure>
+        <figure class="testimonial">
+          <blockquote>“El pack Aventureros nos salvó durante las vacaciones. Incluye guías con ideas para aprovechar cada cuento.”</blockquote>
+          <cite>Diego · Papá homeschooler</cite>
+        </figure>
+        <figure class="testimonial">
+          <blockquote>“Compré un domingo por la noche y en minutos ya tenía el PDF en mi correo. Excelente atención.”</blockquote>
+          <cite>Sandra · Profesora inicial</cite>
+        </figure>
+      </div>
+      <div class="guarantee" style="margin-top:22px">
+        <span style="font-size:1.8rem">💌</span>
+        <div>
+          <strong>Garantía de satisfacción</strong>
+          <p style="margin:6px 0 0">Si el material no cumple tus expectativas, te ofrecemos cambio por otro título o devolución.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq">
+        <details>
+          <summary>¿Cómo recibo mis libros en PDF?</summary>
+          <p>En cuanto confirmemos tu pago, te enviamos un enlace de descarga directo y copia por correo electrónico.</p>
+        </details>
+        <details>
+          <summary>¿Puedo imprimir los PDFs varias veces?</summary>
+          <p>Sí, tu compra incluye licencia familiar o para un aula. Puedes imprimir para tus hijos o estudiantes cuando necesites.</p>
+        </details>
+        <details>
+          <summary>¿Hacen envíos físicos?</summary>
+          <p>Nuestros productos son digitales. Sin embargo, recomendamos imprentas aliadas si deseas recibirlo empastado.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa si pierdo el archivo?</summary>
+          <p>No te preocupes, guardamos tu compra para que puedas solicitar la descarga nuevamente sin costo.</p>
+        </details>
+      </div>
+    </section>
+
     <section class="section" id="contacto">
-      <h2>Contacto</h2>
-      <p><strong>WhatsApp:</strong> <a href="https://wa.me/51999999999">+51 999 999 999</a></p>
-    </section>
-    <footer>
-      <div class="wrap foot">
-        <div>© <span id="y"></span> Cuentonautas · Hecho con ❤ en Perú</div>
+      <h2>¿Listo para crear momentos mágicos?</h2>
+      <p>Escríbenos por WhatsApp o correo y recibe asesoría personalizada para elegir el mejor material para tu peque.</p>
+      <div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:18px">
+        <div class="step" style="gap:12px">
+          <div class="step-number">📱</div>
+          <strong>WhatsApp</strong>
+          <a class="btn" style="justify-content:center" href="https://wa.me/51999999999" target="_blank" rel="noopener">Enviar mensaje</a>
+        </div>
+        <div class="step" style="gap:12px">
+          <div class="step-number">✉️</div>
+          <strong>Email</strong>
+          <a class="btn alt" style="justify-content:center" href="mailto:hola@cuentonautas.com">hola@cuentonautas.com</a>
+        </div>
       </div>
-    </footer>
+    </section>
   </main>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <footer>
+    <div class="wrap foot">
+      <div>© <span id="y"></span> Cuentonautas · Librería digital peruana</div>
+      <div class="social">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    const productSelect = document.getElementById('product-select');
+    const orderTitle = document.getElementById('order-title');
+    const orderSummary = document.getElementById('order-summary');
+    const orderPrice = document.getElementById('order-price');
+    const orderIncludes = document.getElementById('order-includes');
+    const orderForm = document.getElementById('order-form');
+    const orderSubmit = document.getElementById('order-submit');
+
+    const baseIncludes = [
+      'Descarga inmediata en PDF',
+      'Actualizaciones gratuitas de por vida',
+      'Acompañamiento por WhatsApp'
+    ];
+
+    function formatPrice(value) {
+      return `S/ ${Number(value).toFixed(2)}`;
+    }
+
+    function updateSummary() {
+      const option = productSelect.selectedOptions[0];
+      const { price, title, summary } = option.dataset;
+      orderTitle.textContent = title;
+      orderSummary.textContent = summary;
+      orderPrice.textContent = formatPrice(price);
+
+      const includes = option.value === 'pack'
+        ? [
+            'Tres PDFs ilustrados listos para imprimir',
+            'Guía para familias con ideas de lectura',
+            'Playlist exclusiva de audio cuentos'
+          ]
+        : baseIncludes;
+
+      orderIncludes.innerHTML = includes.map(item => `<li>${item}</li>`).join('');
+    }
+
+    productSelect.addEventListener('change', updateSummary);
+    updateSummary();
+
+    orderForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(orderForm);
+      const option = productSelect.selectedOptions[0];
+      const whatsLink = option.dataset.whats;
+      const message = encodeURIComponent(
+        `Hola Cuentonautas 👋\nSoy ${formData.get('name')} y quiero ${option.dataset.title}.\n` +
+        `Correo: ${formData.get('email')}\n` +
+        `Pago preferido: ${formData.get('payment')}\n` +
+        `${formData.get('message') ? `Notas: ${formData.get('message')}` : ''}`
+      );
+      const finalUrl = `${whatsLink}?text=${message}`;
+      window.open(finalUrl, '_blank');
+      orderSubmit.setAttribute('aria-busy', 'true');
+      orderSubmit.disabled = true;
+      orderSubmit.textContent = 'Abriendo WhatsApp…';
+      setTimeout(() => {
+        orderSubmit.removeAttribute('aria-busy');
+        orderSubmit.disabled = false;
+        orderSubmit.innerHTML = '<span>💬</span> Confirmar por WhatsApp';
+      }, 1800);
+    });
+  </script>
 </body>
 </html>
