@@ -56,6 +56,11 @@
     .try{flex:1;text-align:center;text-decoration:none;border:2px solid var(--primary);color:var(--primary);padding:8px;border-radius:12px;font-weight:700;background:white}
     .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .about .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .sample{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-top:18px}
+    .sample p{color:var(--muted);max-width:65ch}
+    .sample-viewer{margin-top:18px;position:relative;padding-top:65%;border-radius:12px;overflow:hidden;background:#111}
+    .sample-viewer iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+    .sample-links{margin-top:16px}
     footer{margin-top:40px;padding:24px 0;border-top:1px solid rgba(0,0,0,.06);color:var(--muted)}
     .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
     .social a{text-decoration:none;margin-right:14px;color:var(--muted)}
@@ -101,6 +106,18 @@
         <div class="cloud one"></div>
         <div class="cloud two"></div>
         <div class="book">📚</div>
+      </div>
+    </section>
+    <section class="section" id="muestra-sol" aria-labelledby="muestra-sol-title">
+      <div class="sample">
+        <h2 id="muestra-sol-title">Muestra de "Mi día con el Sol"</h2>
+        <p>Explora algunas páginas del libro para conocer las ilustraciones y actividades incluidas.</p>
+        <div class="sample-viewer" role="region" aria-label="Visor de muestra del libro Mi día con el Sol">
+          <iframe src="https://docs.google.com/gview?embedded=1&amp;url=https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="Visor de PDF con la muestra del libro Mi día con el Sol" loading="lazy"></iframe>
+        </div>
+        <p class="sample-links">
+          <a class="btn alt" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" rel="noopener">Abrir muestra en nueva pestaña</a>
+        </p>
       </div>
     </section>
     <section class="section" id="catalogo">
