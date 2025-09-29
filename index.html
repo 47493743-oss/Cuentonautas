@@ -7,19 +7,33 @@
   <meta name="description" content="Tienda gratuita de libros infantiles: cuentos para colorear, aprendizaje temprano y más. Descarga digital o envío físico.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #fffdf8;
-      --primary: #2ea5ff;
-      --secondary: #f7c873;
-      --ink: #1f2937;
-      --muted: #6b7280;
+      --bg: #fff8fb;
+      --primary: #ff8fb1;
+      --secondary: #7ad9f5;
+      --tertiary: #ffd56f;
+      --accent: #a28bff;
+      --ink: #3c3354;
+      --muted: #7b6b97;
       --card: #ffffff;
-      --shadow: 0 12px 30px rgba(31,41,55,.06);
-      --radius: 18px;
+      --shadow: 0 18px 38px rgba(62, 51, 84, .08);
+      --radius: 22px;
     }
-    html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+    html,body{
+      margin:0;
+      height:100%;
+      background:var(--bg);
+      background-image: radial-gradient(circle at 8% 12%, rgba(255, 215, 180, .7), transparent 40%),
+        radial-gradient(circle at 90% 18%, rgba(122, 217, 245, .6), transparent 40%),
+        radial-gradient(circle at 25% 85%, rgba(162, 139, 255, .35), transparent 45%),
+        linear-gradient(135deg, rgba(255, 143, 177, .12), rgba(122, 217, 245, .12));
+      color:var(--ink);
+      font-family:'Fredoka', 'Quicksand', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      line-height:1.65;
+      letter-spacing:.01em;
+    }
     .wrap{max-width:1100px;margin:0 auto;padding:20px}
     header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:rgba(255,253,248,.85);border-bottom:1px solid rgba(0,0,0,.04);z-index:50}
     .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
@@ -31,23 +45,54 @@
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:28px 0}
     .h-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
     h1{font-family:Fredoka,system-ui,sans-serif;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.1;margin:0 0 10px}
-    .lead{color:var(--muted);font-size:1.05rem}
+    .lead{color:var(--muted);font-size:1.08rem;max-width:46ch}
     .cta{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px}
     .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:2px solid var(--primary);background:var(--primary);color:white;font-weight:700;text-decoration:none}
     .btn.alt{background:transparent;color:var(--primary)}
-    .hero-illustration{position:relative}
-    .sun{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffeaa7, #f7c873);box-shadow:0 8px 30px rgba(247,200,115,.45);position:absolute;top:0;left:8%;}
-    .cloud{position:absolute;background:white;border-radius:999px;box-shadow:var(--shadow)}
-    .cloud.one{width:190px;height:60px;top:150px;left:0}
-    .cloud.two{width:140px;height:50px;top:210px;left:180px}
-    .book{position:absolute;right:0;bottom:0;width:62%;aspect-ratio:4/3;background:linear-gradient(135deg,#fff,#f5f7fb);border-radius:22px;border:6px solid #e6ecf7;box-shadow:var(--shadow);display:grid;place-items:center}
-    .book::before{content:"";width:78%;height:14px;background:#e6ecf7;border-radius:9px;position:absolute;top:18%}
-    .book::after{content:"";width:78%;height:14px;background:#e6ecf7;border-radius:9px;position:absolute;top:36%}
+    .hero-illustration{position:relative;min-height:320px;display:flex;align-items:flex-end;justify-content:center;padding:20px 0;gap:28px}
+    .hero-illustration::after{content:"";position:absolute;bottom:18px;left:10%;right:10%;height:12px;border-radius:12px;background:rgba(60,51,84,.1);filter:blur(8px)}
+    .rainbow{position:absolute;top:6%;left:10%;width:220px;height:220px;border-radius:50%;background:conic-gradient(from 210deg,var(--secondary),var(--primary),var(--tertiary),var(--accent),var(--secondary));-webkit-mask:radial-gradient(circle at center, transparent 55%, black 57%);mask:radial-gradient(circle at center, transparent 55%, black 57%);opacity:.85;animation:float 8s ease-in-out infinite}
+    .character{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2}
+    .character .head{width:84px;height:84px;border-radius:40px;background:radial-gradient(circle at 40% 35%, #ffe6f1 25%, #ffbfd6 60%, #ff9ec0 100%);border:4px solid white;box-shadow:0 10px 20px rgba(60,51,84,.18);position:relative}
+    .character .head::before,.character .head::after{content:"";position:absolute;top:36px;width:12px;height:12px;border-radius:50%;background:#3c3354}
+    .character .head::before{left:24px}
+    .character .head::after{right:24px}
+    .character .smile{position:absolute;bottom:20px;width:36px;height:20px;border:4px solid #3c3354;border-top:none;border-radius:0 0 36px 36px;left:50%;transform:translateX(-50%)}
+    .character .body{width:110px;height:120px;border-radius:60px 60px 30px 30px;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 16px 28px rgba(255,143,177,.3);display:grid;place-items:center;animation:sway 4.8s ease-in-out infinite;position:relative}
+    .character .body::after{content:"★";font-size:28px;color:white;filter:drop-shadow(0 2px 2px rgba(60,51,84,.2))}
+    .character.buddy{transform:translateY(-10px) scale(.88);animation:float 6s ease-in-out infinite reverse}
+    .character.buddy .head{background:radial-gradient(circle at 40% 35%, #dff9ff 25%, #bfe9ff 60%, #90d5ff 100%)}
+    .character.buddy .body{background:linear-gradient(135deg,var(--secondary),#6ddccf)}
+    .character.buddy .body::after{content:"⚽"}
+    .character .smile{display:block}
+    .character.puppet{transform:translateY(-16px) scale(.95);animation:float 7.4s ease-in-out infinite}
+    .character.puppet .head{background:radial-gradient(circle at 50% 40%, #fff1d9 20%, #ffd56f 60%, #ffbb57 100%)}
+    .character.puppet .body{width:118px;height:118px;border-radius:40px;background:linear-gradient(160deg,var(--tertiary),#ffb88a);box-shadow:0 14px 26px rgba(255,184,138,.32)}
+    .character.puppet .body::after{content:"🧸";font-size:40px}
+    .toy-blocks{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:1}
+    .toy-blocks span{width:54px;height:54px;border-radius:18px;box-shadow:0 12px 18px rgba(60,51,84,.12);display:grid;place-items:center;font-size:26px;color:white;font-weight:700}
+    .toy-blocks span:nth-child(1){background:linear-gradient(135deg,var(--secondary),#8cf0d6)}
+    .toy-blocks span:nth-child(2){background:linear-gradient(135deg,var(--primary),var(--accent))}
+    .toy-blocks span:nth-child(3){background:linear-gradient(135deg,var(--tertiary),#ff9f6c)}
+    .kite{position:absolute;top:14%;right:8%;width:120px;height:120px;background:conic-gradient(from 45deg,var(--accent),var(--primary),var(--secondary),var(--tertiary),var(--accent));clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%);animation:sway 5.8s ease-in-out infinite}
+    .kite::after{content:"";position:absolute;bottom:-70px;left:48px;width:4px;height:70px;background:rgba(60,51,84,.2);border-radius:999px}
+    .floating-star{position:absolute;width:48px;height:48px;background:radial-gradient(circle,#fff 20%,rgba(255,255,255,0) 70%);color:#ffdf6f;font-size:30px;display:grid;place-items:center;animation:float 6s ease-in-out infinite}
+    .floating-star.one{top:22%;right:32%}
+    .floating-star.two{top:58%;left:28%;animation-delay:-2s}
+    .floating-star span{filter:drop-shadow(0 4px 8px rgba(255,213,111,.4))}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
     .section{padding:24px 0}
     .section h2{font-family:Fredoka,system-ui,sans-serif;font-size:1.6rem;margin:0 0 14px}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-    .thumb{aspect-ratio:4/3;background:#f3f4f6;display:grid;place-items:center;font-weight:700;color:#9ca3af;font-size:1.1rem}
+    .thumb{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,rgba(255,143,177,.16),rgba(162,139,255,.26));display:grid;place-items:center;padding:12px;border-bottom:4px solid rgba(60,51,84,.08)}
+    .thumb svg{width:90%;height:auto}
+    .thumb.sunny{background:linear-gradient(135deg,rgba(255,213,111,.4),rgba(255,143,177,.28))}
+    .thumb.ocean{background:linear-gradient(135deg,rgba(122,217,245,.45),rgba(140,240,214,.35))}
+    .thumb.forest{background:linear-gradient(135deg,rgba(162,139,255,.32),rgba(255,213,111,.34))}
+    .thumb .sticker{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:12px;background:white;border:3px solid rgba(60,51,84,.08);display:grid;place-items:center;font-size:20px;transform:rotate(-10deg);box-shadow:0 8px 12px rgba(60,51,84,.12)}
+    .muted{color:var(--muted)}
     .card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
     .price{font-weight:800;color:#0f766e}
     .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(46,165,255,.12);color:var(--primary);font-weight:700;font-size:.8rem}
@@ -56,6 +101,7 @@
     .try{flex:1;text-align:center;text-decoration:none;border:2px solid var(--primary);color:var(--primary);padding:8px;border-radius:12px;font-weight:700;background:white}
     .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .about .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .about .panel ul{margin:0 0 12px;padding-left:20px;display:grid;gap:6px}
     .sample{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-top:18px}
     .sample p{color:var(--muted);max-width:65ch}
     .sample-viewer{margin-top:18px;position:relative;padding-top:65%;border-radius:12px;overflow:hidden;background:#111}
@@ -68,11 +114,13 @@
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr 1fr}
       .about{grid-template-columns:1fr}
-      .book{width:78%}
+      .hero-illustration{min-height:280px}
     }
     @media (max-width: 560px){
       .grid{grid-template-columns:1fr}
       nav{display:none}
+      .hero-illustration{min-height:240px;gap:18px}
+      .toy-blocks span{width:46px;height:46px;font-size:22px}
     }
   </style>
 </head>
@@ -93,25 +141,39 @@
   <main class="wrap">
     <section class="hero" id="inicio">
       <div class="h-card">
-        <h1>Libros infantiles que inspiran curiosidad ✨</h1>
-        <p class="lead">Cuentos para colorear, aprendizaje temprano y recursos creativos hechos con cariño.</p>
+        <h1>Libros infantiles que abrazan su imaginación ✨</h1>
+        <p class="lead">Historias y actividades diseñadas para que tu peque aprenda jugando, mientras tú disfrutas de momentos de conexión y calma.</p>
         <div class="cta">
-          <a class="btn" href="#catalogo">Ver catálogo</a>
-          <a class="btn alt" href="#contacto">Hablemos</a>
+          <a class="btn" href="#catalogo">Descubrir cuentos</a>
+          <a class="btn alt" href="#contacto">Agendar asesoría</a>
         </div>
-        <div style="margin-top:14px"><span class="badge">Nuevos</span> <span class="badge" style="background:rgba(247,200,115,.18);color:#b7791f">Edades 1–7</span></div>
+        <div style="margin-top:14px"><span class="badge">Nuevos</span> <span class="badge" style="background:rgba(255,143,177,.18);color:#c2417c">Tiempo en familia</span> <span class="badge" style="background:rgba(122,217,245,.22);color:#1b809e">Edades 1–7</span></div>
       </div>
       <div class="hero-illustration" aria-hidden="true">
-        <div class="sun"></div>
-        <div class="cloud one"></div>
-        <div class="cloud two"></div>
-        <div class="book">📚</div>
+        <div class="rainbow"></div>
+        <div class="kite"></div>
+        <div class="floating-star one"><span>⭐</span></div>
+        <div class="floating-star two"><span>🌟</span></div>
+        <div class="toy-blocks" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
+        <div class="character">
+          <div class="head"><span class="smile"></span></div>
+          <div class="body"></div>
+        </div>
+        <div class="character buddy">
+          <div class="head"><span class="smile"></span></div>
+          <div class="body"></div>
+        </div>
+        <div class="character puppet">
+          <div class="head"><span class="smile"></span></div>
+          <div class="body"></div>
+        </div>
       </div>
     </section>
     <section class="section" id="muestra-sol" aria-labelledby="muestra-sol-title">
       <div class="sample">
         <h2 id="muestra-sol-title">Muestra de "Mi día con el Sol"</h2>
-        <p>Explora algunas páginas del libro para conocer las ilustraciones y actividades incluidas.</p>
+        <p>Explora algunas páginas y descubre cómo las actividades guiadas invitan a tu peque a identificar emociones, moverse y crear.</p>
+        <p>Incluye propuestas para que, como familia, transformen la rutina de la mañana en un momento cálido y lleno de risas.</p>
         <div class="sample-viewer" role="region" aria-label="Visor de muestra del libro Mi día con el Sol">
           <iframe src="https://docs.google.com/gview?embedded=1&amp;url=https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="Visor de PDF con la muestra del libro Mi día con el Sol" loading="lazy"></iframe>
         </div>
@@ -124,9 +186,35 @@
       <h2>Catálogo</h2>
       <div class="grid">
         <article class="card">
-          <div class="thumb">Portada "Señor Sol"</div>
+          <div class="thumb sunny">
+            <svg viewBox="0 0 120 90" role="img" aria-labelledby="thumb-sol-title">
+              <title id="thumb-sol-title">Ilustración de sol sonriente para niñas y niños</title>
+              <rect width="120" height="90" rx="16" fill="url(#sun-bg)" />
+              <defs>
+                <linearGradient id="sun-bg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ffe5a1" />
+                  <stop offset="100%" stop-color="#ffb6c7" />
+                </linearGradient>
+              </defs>
+              <circle cx="48" cy="45" r="22" fill="#ffcf5c" stroke="#ffd56f" stroke-width="6" />
+              <circle cx="40" cy="40" r="4" fill="#3c3354" />
+              <circle cx="56" cy="40" r="4" fill="#3c3354" />
+              <path d="M39 52 Q48 60 57 52" stroke="#3c3354" stroke-width="4" fill="none" stroke-linecap="round" />
+              <g stroke="#ffcf5c" stroke-width="4" stroke-linecap="round">
+                <line x1="48" y1="18" x2="48" y2="6" />
+                <line x1="30" y1="24" x2="22" y2="14" />
+                <line x1="66" y1="24" x2="74" y2="14" />
+                <line x1="30" y1="66" x2="20" y2="72" />
+                <line x1="66" y1="66" x2="78" y2="72" />
+              </g>
+              <ellipse cx="90" cy="58" rx="20" ry="16" fill="#ffffff" opacity="0.85" />
+              <ellipse cx="100" cy="50" rx="16" ry="12" fill="#ffffff" opacity="0.75" />
+            </svg>
+            <span class="sticker" aria-hidden="true">🌞</span>
+          </div>
           <div class="card-body">
             <h3>Mi día con el Sol (para colorear)</h3>
+            <p class="muted">Rutinas luminosas para hablar de emociones, hábitos y gratitud desde la primera infancia.</p>
             <p class="muted">PDF imprimible • 24 páginas • 3+</p>
             <strong class="price">S/ 12.00</strong>
             <div class="card-actions">
@@ -135,16 +223,97 @@
             </div>
           </div>
         </article>
+        <article class="card">
+          <div class="thumb ocean">
+            <svg viewBox="0 0 120 90" role="img" aria-labelledby="thumb-ocean-title">
+              <title id="thumb-ocean-title">Miniatura de aventura submarina con peces amistosos</title>
+              <rect width="120" height="90" rx="16" fill="url(#ocean-bg)" />
+              <defs>
+                <linearGradient id="ocean-bg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#9ee7ff" />
+                  <stop offset="100%" stop-color="#6fe3c7" />
+                </linearGradient>
+              </defs>
+              <path d="M0 70 Q30 60 60 70 T120 70 V90 H0 Z" fill="#4cc6c9" opacity="0.65" />
+              <path d="M0 62 Q30 52 60 62 T120 62 V90 H0 Z" fill="#7de0f0" opacity="0.55" />
+              <g fill="#ff9ec0">
+                <ellipse cx="40" cy="48" rx="12" ry="8" />
+                <polygon points="52,48 62,42 62,54" />
+              </g>
+              <circle cx="36" cy="46" r="2" fill="#3c3354" />
+              <path d="M32 50 Q36 52 40 50" stroke="#3c3354" stroke-width="2" fill="none" stroke-linecap="round" />
+              <g fill="#ffd56f">
+                <ellipse cx="76" cy="40" rx="10" ry="7" />
+                <polygon points="86,40 96,34 96,46" />
+              </g>
+              <circle cx="72" cy="38" r="2" fill="#3c3354" />
+              <path d="M68 42 Q72 44 76 42" stroke="#3c3354" stroke-width="2" fill="none" stroke-linecap="round" />
+              <circle cx="30" cy="26" r="6" fill="#fff7d6" opacity="0.8" />
+              <circle cx="90" cy="24" r="8" fill="#fff7d6" opacity="0.8" />
+            </svg>
+            <span class="sticker" aria-hidden="true">🐠</span>
+          </div>
+          <div class="card-body">
+            <h3>Aventuras en el Océano</h3>
+            <p class="muted">Juego simbólico para descubrir criaturas marinas y practicar vocabulario emocional bajo el mar.</p>
+            <p class="muted">PDF imprimible • 28 páginas • 4+</p>
+            <strong class="price">S/ 15.00</strong>
+            <div class="card-actions">
+              <a class="buy" href="https://www.paypal.com/donate/?hosted_button_id=H37DM4ACU3L88" target="_blank" rel="noopener">Comprar</a>
+              <a class="try" href="#contacto">Pedir demo</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb forest">
+            <svg viewBox="0 0 120 90" role="img" aria-labelledby="thumb-forest-title">
+              <title id="thumb-forest-title">Escena de bosque mágico con animales amistosos</title>
+              <rect width="120" height="90" rx="16" fill="url(#forest-bg)" />
+              <defs>
+                <linearGradient id="forest-bg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#c7c5ff" />
+                  <stop offset="100%" stop-color="#ffe59d" />
+                </linearGradient>
+              </defs>
+              <path d="M14 78 L30 38 L46 78 Z" fill="#8ed081" />
+              <path d="M54 78 L68 34 L82 78 Z" fill="#7cc99a" />
+              <circle cx="86" cy="38" r="14" fill="#ffbf95" />
+              <circle cx="86" cy="36" r="4" fill="#3c3354" />
+              <circle cx="94" cy="36" r="4" fill="#3c3354" />
+              <path d="M86 44 Q90 48 94 44" stroke="#3c3354" stroke-width="3" fill="none" stroke-linecap="round" />
+              <circle cx="60" cy="26" r="8" fill="#ffeef9" opacity="0.8" />
+              <circle cx="32" cy="26" r="6" fill="#ffeef9" opacity="0.8" />
+              <rect x="18" y="70" width="84" height="10" rx="4" fill="#ffffff" opacity="0.6" />
+            </svg>
+            <span class="sticker" aria-hidden="true">🦊</span>
+          </div>
+          <div class="card-body">
+            <h3>Bosque de Sueños</h3>
+            <p class="muted">Cuento interactivo con respiraciones guiadas para acompañar la hora de dormir y bajar revoluciones.</p>
+            <p class="muted">PDF imprimible • 18 páginas • 2+</p>
+            <strong class="price">S/ 10.00</strong>
+            <div class="card-actions">
+              <a class="buy" href="https://www.paypal.com/donate/?hosted_button_id=H37DM4ACU3L88" target="_blank" rel="noopener">Comprar</a>
+              <a class="try" href="#contacto">Recibir guía</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
     <section class="section about" id="sobre">
       <div class="panel">
         <h2>Sobre mí</h2>
-        <p>¡Hola! Soy Sarita Zuñiga, creadora de material infantil con enfoque lúdico y pedagógico.</p>
+        <p>¡Hola! Soy Sarita Zuñiga, mamá creativa y educadora. Me encanta diseñar cuentos que celebren la curiosidad, inviten a conversar y regalen abrazos extra antes de dormir.</p>
+        <p class="muted">Cada libro incluye sugerencias para acompañar a tu peque según su ritmo y reforzar vínculos en casa o en el aula.</p>
       </div>
       <div class="panel">
-        <h2>Cómo comprar</h2>
-        <p>Elige un producto y haz clic en Comprar. Recibirás el PDF al instante.</p>
+        <h2>Compra rápida</h2>
+        <ul>
+          <li>Elige el cuento y haz clic en <strong>Comprar</strong>.</li>
+          <li>Recibe el PDF al instante en tu correo o WhatsApp.</li>
+          <li>Disfruta actividades imprimibles, playlists y tips para guiar la experiencia.</li>
+        </ul>
+        <p class="muted">Si necesitas orientación personalizada, escríbeme y elegimos juntos el recurso ideal.</p>
       </div>
     </section>
     <section class="section" id="contacto">
