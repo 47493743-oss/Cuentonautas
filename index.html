@@ -3,329 +3,923 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cuentonautas | Libros infantiles</title>
-  <meta name="description" content="Tienda gratuita de libros infantiles: cuentos para colorear, aprendizaje temprano y más. Descarga digital o envío físico.">
+  <title>Puzzle Galaxy | Prototipo de juego de rompecabezas</title>
+  <meta name="description" content="Prototipo de rompecabezas espacial con niveles deslizables, animaciones suaves y sistema de logros listo para personalizar." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg: #fff8fb;
-      --primary: #ff8fb1;
-      --secondary: #7ad9f5;
-      --tertiary: #ffd56f;
-      --accent: #a28bff;
-      --ink: #3c3354;
-      --muted: #7b6b97;
-      --card: #ffffff;
-      --shadow: 0 18px 38px rgba(62, 51, 84, .08);
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111a31;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --ink: #f8fafc;
+      --muted: rgba(248, 250, 252, 0.72);
+      --primary: #38bdf8;
+      --primary-strong: #0ea5e9;
+      --accent: #c084fc;
+      --success: #4ade80;
+      --warning: #facc15;
+      --danger: #f87171;
       --radius: 22px;
+      color-scheme: dark;
     }
-    html,body{
-      margin:0;
-      height:100%;
-      background:var(--bg);
-      background-image: radial-gradient(circle at 8% 12%, rgba(255, 215, 180, .7), transparent 40%),
-        radial-gradient(circle at 90% 18%, rgba(122, 217, 245, .6), transparent 40%),
-        radial-gradient(circle at 25% 85%, rgba(162, 139, 255, .35), transparent 45%),
-        linear-gradient(135deg, rgba(255, 143, 177, .12), rgba(122, 217, 245, .12));
-      color:var(--ink);
-      font-family:'Fredoka', 'Quicksand', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      line-height:1.65;
-      letter-spacing:.01em;
+
+    * {
+      box-sizing: border-box;
     }
-    .wrap{max-width:1100px;margin:0 auto;padding:20px}
-    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:rgba(255,253,248,.85);border-bottom:1px solid rgba(0,0,0,.04);z-index:50}
-    .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
-    .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#91d3ff);display:grid;place-items:center;color:white;font-weight:700;box-shadow:var(--shadow)}
-    .brand span{font-family:Fredoka,system-ui,sans-serif;font-size:1.15rem;font-weight:700}
-    nav a{margin-left:16px;text-decoration:none;color:var(--ink);font-weight:600}
-    nav a:hover{color:var(--primary)}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:28px 0}
-    .h-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
-    h1{font-family:Fredoka,system-ui,sans-serif;font-size:clamp(1.8rem,3.2vw,3rem);line-height:1.1;margin:0 0 10px}
-    .lead{color:var(--muted);font-size:1.08rem;max-width:46ch}
-    .cta{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;border:2px solid var(--primary);background:var(--primary);color:white;font-weight:700;text-decoration:none}
-    .btn.alt{background:transparent;color:var(--primary)}
-    .hero-illustration{position:relative;min-height:320px;display:flex;align-items:flex-end;justify-content:center;padding:20px 0;gap:28px}
-    .hero-illustration::after{content:"";position:absolute;bottom:18px;left:10%;right:10%;height:12px;border-radius:12px;background:rgba(60,51,84,.1);filter:blur(8px)}
-    .rainbow{position:absolute;top:6%;left:10%;width:220px;height:220px;border-radius:50%;background:conic-gradient(from 210deg,var(--secondary),var(--primary),var(--tertiary),var(--accent),var(--secondary));-webkit-mask:radial-gradient(circle at center, transparent 55%, black 57%);mask:radial-gradient(circle at center, transparent 55%, black 57%);opacity:.85;animation:float 8s ease-in-out infinite}
-    .character{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2}
-    .character .head{width:84px;height:84px;border-radius:40px;background:radial-gradient(circle at 40% 35%, #ffe6f1 25%, #ffbfd6 60%, #ff9ec0 100%);border:4px solid white;box-shadow:0 10px 20px rgba(60,51,84,.18);position:relative}
-    .character .head::before,.character .head::after{content:"";position:absolute;top:36px;width:12px;height:12px;border-radius:50%;background:#3c3354}
-    .character .head::before{left:24px}
-    .character .head::after{right:24px}
-    .character .smile{position:absolute;bottom:20px;width:36px;height:20px;border:4px solid #3c3354;border-top:none;border-radius:0 0 36px 36px;left:50%;transform:translateX(-50%)}
-    .character .body{width:110px;height:120px;border-radius:60px 60px 30px 30px;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 16px 28px rgba(255,143,177,.3);display:grid;place-items:center;animation:sway 4.8s ease-in-out infinite;position:relative}
-    .character .body::after{content:"★";font-size:28px;color:white;filter:drop-shadow(0 2px 2px rgba(60,51,84,.2))}
-    .character.buddy{transform:translateY(-10px) scale(.88);animation:float 6s ease-in-out infinite reverse}
-    .character.buddy .head{background:radial-gradient(circle at 40% 35%, #dff9ff 25%, #bfe9ff 60%, #90d5ff 100%)}
-    .character.buddy .body{background:linear-gradient(135deg,var(--secondary),#6ddccf)}
-    .character.buddy .body::after{content:"⚽"}
-    .character .smile{display:block}
-    .character.puppet{transform:translateY(-16px) scale(.95);animation:float 7.4s ease-in-out infinite}
-    .character.puppet .head{background:radial-gradient(circle at 50% 40%, #fff1d9 20%, #ffd56f 60%, #ffbb57 100%)}
-    .character.puppet .body{width:118px;height:118px;border-radius:40px;background:linear-gradient(160deg,var(--tertiary),#ffb88a);box-shadow:0 14px 26px rgba(255,184,138,.32)}
-    .character.puppet .body::after{content:"🧸";font-size:40px}
-    .toy-blocks{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:1}
-    .toy-blocks span{width:54px;height:54px;border-radius:18px;box-shadow:0 12px 18px rgba(60,51,84,.12);display:grid;place-items:center;font-size:26px;color:white;font-weight:700}
-    .toy-blocks span:nth-child(1){background:linear-gradient(135deg,var(--secondary),#8cf0d6)}
-    .toy-blocks span:nth-child(2){background:linear-gradient(135deg,var(--primary),var(--accent))}
-    .toy-blocks span:nth-child(3){background:linear-gradient(135deg,var(--tertiary),#ff9f6c)}
-    .kite{position:absolute;top:14%;right:8%;width:120px;height:120px;background:conic-gradient(from 45deg,var(--accent),var(--primary),var(--secondary),var(--tertiary),var(--accent));clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%);animation:sway 5.8s ease-in-out infinite}
-    .kite::after{content:"";position:absolute;bottom:-70px;left:48px;width:4px;height:70px;background:rgba(60,51,84,.2);border-radius:999px}
-    .floating-star{position:absolute;width:48px;height:48px;background:radial-gradient(circle,#fff 20%,rgba(255,255,255,0) 70%);color:#ffdf6f;font-size:30px;display:grid;place-items:center;animation:float 6s ease-in-out infinite}
-    .floating-star.one{top:22%;right:32%}
-    .floating-star.two{top:58%;left:28%;animation-delay:-2s}
-    .floating-star span{filter:drop-shadow(0 4px 8px rgba(255,213,111,.4))}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-    @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
-    .section{padding:24px 0}
-    .section h2{font-family:Fredoka,system-ui,sans-serif;font-size:1.6rem;margin:0 0 14px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-    .thumb{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,rgba(255,143,177,.16),rgba(162,139,255,.26));display:grid;place-items:center;padding:12px;border-bottom:4px solid rgba(60,51,84,.08)}
-    .thumb svg{width:90%;height:auto}
-    .thumb.sunny{background:linear-gradient(135deg,rgba(255,213,111,.4),rgba(255,143,177,.28))}
-    .thumb.ocean{background:linear-gradient(135deg,rgba(122,217,245,.45),rgba(140,240,214,.35))}
-    .thumb.forest{background:linear-gradient(135deg,rgba(162,139,255,.32),rgba(255,213,111,.34))}
-    .thumb .sticker{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:12px;background:white;border:3px solid rgba(60,51,84,.08);display:grid;place-items:center;font-size:20px;transform:rotate(-10deg);box-shadow:0 8px 12px rgba(60,51,84,.12)}
-    .muted{color:var(--muted)}
-    .card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
-    .price{font-weight:800;color:#0f766e}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(46,165,255,.12);color:var(--primary);font-weight:700;font-size:.8rem}
-    .card-actions{margin-top:auto;display:flex;gap:8px}
-    .buy{flex:1;text-align:center;text-decoration:none;background:var(--primary);color:white;padding:10px;border-radius:12px;font-weight:700}
-    .try{flex:1;text-align:center;text-decoration:none;border:2px solid var(--primary);color:var(--primary);padding:8px;border-radius:12px;font-weight:700;background:white}
-    .about{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .about .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
-    .about .panel ul{margin:0 0 12px;padding-left:20px;display:grid;gap:6px}
-    .sample{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-top:18px}
-    .sample p{color:var(--muted);max-width:65ch}
-    .sample-viewer{margin-top:18px;position:relative;padding-top:65%;border-radius:12px;overflow:hidden;background:#111}
-    .sample-viewer iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-    .sample-links{margin-top:16px}
-    footer{margin-top:40px;padding:24px 0;border-top:1px solid rgba(0,0,0,.06);color:var(--muted)}
-    .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
-    .social a{text-decoration:none;margin-right:14px;color:var(--muted)}
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr 1fr}
-      .about{grid-template-columns:1fr}
-      .hero-illustration{min-height:280px}
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.2), transparent 45%),
+        radial-gradient(circle at 80% 12%, rgba(192, 132, 252, 0.26), transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(74, 222, 128, 0.18), transparent 55%),
+        linear-gradient(140deg, var(--bg), #020617 70%);
+      color: var(--ink);
+      font-family: 'Quicksand', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      line-height: 1.7;
     }
-    @media (max-width: 560px){
-      .grid{grid-template-columns:1fr}
-      nav{display:none}
-      .hero-illustration{min-height:240px;gap:18px}
-      .toy-blocks span{width:46px;height:46px;font-size:22px}
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px) saturate(170%);
+      background: rgba(15, 23, 42, 0.65);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      z-index: 50;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: white;
+      box-shadow: 0 18px 38px rgba(14, 165, 233, 0.28);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      margin-left: 18px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--primary);
+    }
+
+    main {
+      padding: 48px 0 80px;
+      display: grid;
+      gap: 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 42px;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2rem, 4.2vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      font-weight: 700;
+      color: var(--ink);
+      background: var(--primary-strong);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 28px rgba(56, 189, 248, 0.28);
+    }
+
+    .btn.alt {
+      background: transparent;
+      border-color: rgba(148, 163, 184, 0.35);
+      color: var(--muted);
+    }
+
+    .galaxy-card {
+      position: relative;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), transparent 55%),
+        var(--bg-card);
+      padding: 26px;
+      border-radius: var(--radius);
+      box-shadow: 0 26px 42px rgba(2, 6, 23, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .floating {
+      position: absolute;
+      inset: 14px;
+      border-radius: var(--radius);
+      border: 1px dashed rgba(148, 163, 184, 0.16);
+      pointer-events: none;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      pointer-events: none;
+    }
+
+    .stars span {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(248, 250, 252, 0.85);
+      border-radius: 999px;
+      filter: drop-shadow(0 0 8px rgba(148, 163, 184, 0.45));
+      animation: twinkle 6s ease-in-out infinite;
+    }
+
+    .stars span:nth-child(odd) {
+      animation-delay: 2s;
+    }
+
+    @keyframes twinkle {
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+    }
+
+    .game-section {
+      display: grid;
+      gap: 28px;
+    }
+
+    .game-layout {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      align-items: start;
+    }
+
+    .panel {
+      background: rgba(15, 23, 42, 0.78);
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      box-shadow: 0 18px 28px rgba(2, 6, 23, 0.45);
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .stat {
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat strong {
+      font-size: 1.4rem;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .board {
+      width: min(420px, 90vw);
+      aspect-ratio: 1 / 1;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 26px;
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: inset 0 0 18px rgba(14, 165, 233, 0.08);
+    }
+
+    .tile {
+      border: 0;
+      border-radius: 18px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--ink);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.75), rgba(14, 165, 233, 0.95));
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tile:hover,
+    .tile:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 24px rgba(14, 165, 233, 0.28);
+    }
+
+    .tile.empty {
+      background: rgba(15, 23, 42, 0.3);
+      border: 1px dashed rgba(148, 163, 184, 0.2);
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    select,
+    .btn.small {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.68);
+      color: var(--ink);
+      border: 1px solid rgba(148, 163, 184, 0.26);
+      font-weight: 600;
+      font-family: inherit;
+    }
+
+    .btn.small {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(14, 165, 233, 0.18);
+      border-color: rgba(56, 189, 248, 0.48);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .status {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.68);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      min-height: 56px;
+    }
+
+    .status strong {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .feature-grid article {
+      background: rgba(15, 23, 42, 0.72);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      box-shadow: 0 18px 28px rgba(2, 6, 23, 0.42);
+    }
+
+    .feature-grid h3 {
+      font-family: 'Fredoka', sans-serif;
+      margin-top: 0;
+    }
+
+    ul.features {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      gap: 10px;
+      margin: 0;
+    }
+
+    ul.features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    ul.features li span {
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+
+    .update-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .update-list li {
+      display: grid;
+      gap: 6px;
+    }
+
+    #modes {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .mode-cards {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 18px;
+    }
+
+    .mode-cards li {
+      display: grid;
+      gap: 6px;
+      padding: 18px 20px;
+      border-radius: calc(var(--radius) - 6px);
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .mode-cards strong {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mode-cards strong span {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(192, 132, 252, 0.35));
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .faq {
+      display: grid;
+      gap: 24px;
+      padding: 32px;
+      border-radius: var(--radius);
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: 0 22px 40px rgba(2, 6, 23, 0.35);
+    }
+
+    .faq header h2 {
+      margin-bottom: 6px;
+    }
+
+    .faq header p {
+      margin: 0;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .faq-card {
+      padding: 22px;
+      border-radius: calc(var(--radius) - 6px);
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+    }
+
+    .faq-card h3 {
+      font-family: 'Fredoka', sans-serif;
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+    }
+
+    .faq-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .faq-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      margin-top: 64px;
+      padding: 32px 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        position: static;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .board {
+        width: 100%;
+        padding: 14px;
+        gap: 10px;
+        border-radius: 20px;
+      }
+
+      .faq {
+        padding: 24px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap bar">
-      <a class="brand" href="#inicio" aria-label="Inicio">
-        <div class="logo">📘</div>
-        <span>Cuentonautas</span>
+      <a class="brand" href="#inicio">
+        <span class="logo">PG</span>
+        <span>Puzzle Galaxy</span>
       </a>
       <nav>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#sobre">Sobre mí</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#juego">Demo interactiva</a>
+        <a href="#features">Características</a>
+        <a href="#modes">Modos</a>
+        <a href="#updates">Actualizaciones</a>
       </nav>
     </div>
   </header>
-  <main class="wrap">
-    <section class="hero" id="inicio">
-      <div class="h-card">
-        <h1>Libros infantiles que abrazan su imaginación ✨</h1>
-        <p class="lead">Historias y actividades diseñadas para que tu peque aprenda jugando, mientras tú disfrutas de momentos de conexión y calma.</p>
+  <main class="wrap" id="inicio">
+    <section class="hero">
+      <div>
+        <h1>Puzzle Galaxy: un rompecabezas espacial listo para jugar</h1>
+        <p class="lead">Puzzle Galaxy combina tableros deslizables, animaciones suaves y un sistema de logros que engancha a las y los fans de los rompecabezas. Juega en el navegador, adapta los estilos a tu identidad y sorprende con una experiencia pulida.</p>
         <div class="cta">
-          <a class="btn" href="#catalogo">Descubrir cuentos</a>
-          <a class="btn alt" href="#contacto">Agendar asesoría</a>
+          <a class="btn" href="#juego">Probar ahora</a>
+          <a class="btn alt" href="#features">Ver características</a>
         </div>
-        <div style="margin-top:14px"><span class="badge">Nuevos</span> <span class="badge" style="background:rgba(255,143,177,.18);color:#c2417c">Tiempo en familia</span> <span class="badge" style="background:rgba(122,217,245,.22);color:#1b809e">Edades 1–7</span></div>
       </div>
-      <div class="hero-illustration" aria-hidden="true">
-        <div class="rainbow"></div>
-        <div class="kite"></div>
-        <div class="floating-star one"><span>⭐</span></div>
-        <div class="floating-star two"><span>🌟</span></div>
-        <div class="toy-blocks" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
-        <div class="character">
-          <div class="head"><span class="smile"></span></div>
-          <div class="body"></div>
+      <div class="galaxy-card" aria-hidden="true">
+        <div class="floating"></div>
+        <div class="stars">
+          <span style="top:12%;left:16%;animation-duration:8s"></span>
+          <span style="top:42%;left:68%;animation-duration:6.5s"></span>
+          <span style="top:78%;left:32%;animation-duration:7.2s"></span>
+          <span style="top:24%;left:80%;animation-duration:5.8s"></span>
+          <span style="top:60%;left:12%;animation-duration:9s"></span>
         </div>
-        <div class="character buddy">
-          <div class="head"><span class="smile"></span></div>
-          <div class="body"></div>
-        </div>
-        <div class="character puppet">
-          <div class="head"><span class="smile"></span></div>
-          <div class="body"></div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd612da?auto=format&fit=crop&w=900&q=60" alt="Ilustración espacial" style="width:100%;border-radius:16px;filter:grayscale(0.2) brightness(1.1);mix-blend-mode:screen;">
       </div>
     </section>
-    <section class="section" id="muestra-sol" aria-labelledby="muestra-sol-title">
-      <div class="sample">
-        <h2 id="muestra-sol-title">Muestra de "Mi día con el Sol"</h2>
-        <p>Explora algunas páginas y descubre cómo las actividades guiadas invitan a tu peque a identificar emociones, moverse y crear.</p>
-        <p>Incluye propuestas para que, como familia, transformen la rutina de la mañana en un momento cálido y lleno de risas.</p>
-        <div class="sample-viewer" role="region" aria-label="Visor de muestra del libro Mi día con el Sol">
-          <iframe src="https://docs.google.com/gview?embedded=1&amp;url=https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="Visor de PDF con la muestra del libro Mi día con el Sol" loading="lazy"></iframe>
+
+    <section class="game-section" id="juego">
+      <header>
+        <h2>Demo interactiva del puzzle deslizante</h2>
+        <p class="lead">Pon a prueba la mecánica principal. El motor genera tableros resolubles, contabiliza movimientos y tiempos, y persiste el mejor récord en el almacenamiento local.</p>
+      </header>
+      <div class="game-layout">
+        <div>
+          <div class="board" role="application" aria-label="Tablero del rompecabezas"></div>
+          <div class="controls">
+            <button class="btn small" data-action="shuffle">🔄 Nuevo desafío</button>
+            <button class="btn small" data-action="hint">💡 Movimiento sugerido</button>
+            <label>
+              <span class="sr-only">Seleccionar dificultad</span>
+              <select aria-label="Seleccionar dificultad">
+                <option value="3">Fácil 3x3</option>
+                <option value="4" selected>Normal 4x4</option>
+                <option value="5">Experto 5x5</option>
+              </select>
+            </label>
+          </div>
+          <div class="status" role="status" aria-live="polite"></div>
         </div>
-        <p class="sample-links">
-          <a class="btn alt" href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" target="_blank" rel="noopener">Abrir muestra en nueva pestaña</a>
-        </p>
+        <aside class="panel">
+          <h3>Progresión del jugador</h3>
+          <div class="stats">
+            <div class="stat">
+              <span>Movimientos</span>
+              <strong id="moves">0</strong>
+            </div>
+            <div class="stat">
+              <span>Tiempo</span>
+              <strong id="time">00:00</strong>
+            </div>
+            <div class="stat">
+              <span>Mejor marca</span>
+              <strong id="best">--</strong>
+            </div>
+          </div>
+          <p>Integra misiones diarias, modo contrarreloj y power-ups visuales para incrementar la retención. La lógica está encapsulada en JavaScript puro para que puedas migrarla fácilmente a React Native, Flutter o motores como Unity (UI Toolkit).</p>
+        </aside>
       </div>
     </section>
-    <section class="section" id="catalogo">
-      <h2>Catálogo</h2>
-      <div class="grid">
-        <article class="card">
-          <div class="thumb sunny">
-            <svg viewBox="0 0 120 90" role="img" aria-labelledby="thumb-sol-title">
-              <title id="thumb-sol-title">Ilustración de sol sonriente para niñas y niños</title>
-              <rect width="120" height="90" rx="16" fill="url(#sun-bg)" />
-              <defs>
-                <linearGradient id="sun-bg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#ffe5a1" />
-                  <stop offset="100%" stop-color="#ffb6c7" />
-                </linearGradient>
-              </defs>
-              <circle cx="48" cy="45" r="22" fill="#ffcf5c" stroke="#ffd56f" stroke-width="6" />
-              <circle cx="40" cy="40" r="4" fill="#3c3354" />
-              <circle cx="56" cy="40" r="4" fill="#3c3354" />
-              <path d="M39 52 Q48 60 57 52" stroke="#3c3354" stroke-width="4" fill="none" stroke-linecap="round" />
-              <g stroke="#ffcf5c" stroke-width="4" stroke-linecap="round">
-                <line x1="48" y1="18" x2="48" y2="6" />
-                <line x1="30" y1="24" x2="22" y2="14" />
-                <line x1="66" y1="24" x2="74" y2="14" />
-                <line x1="30" y1="66" x2="20" y2="72" />
-                <line x1="66" y1="66" x2="78" y2="72" />
-              </g>
-              <ellipse cx="90" cy="58" rx="20" ry="16" fill="#ffffff" opacity="0.85" />
-              <ellipse cx="100" cy="50" rx="16" ry="12" fill="#ffffff" opacity="0.75" />
-            </svg>
-            <span class="sticker" aria-hidden="true">🌞</span>
-          </div>
-          <div class="card-body">
-            <h3>Mi día con el Sol (para colorear)</h3>
-            <p class="muted">Rutinas luminosas para hablar de emociones, hábitos y gratitud desde la primera infancia.</p>
-            <p class="muted">PDF imprimible • 24 páginas • 3+</p>
-            <strong class="price">S/ 12.00</strong>
-            <div class="card-actions">
-              <a class="buy" href="https://www.paypal.com/donate/?hosted_button_id=H37DM4ACU3L88" target="_blank" rel="noopener">Comprar</a>
-              <a class="try" href="#muestra-sol">Ver muestra</a>
-            </div>
-          </div>
+
+    <section id="features">
+      <h2>Características principales del juego</h2>
+      <p class="lead">Cada detalle de Puzzle Galaxy está pensado para ofrecer partidas fluidas, retadoras y visualmente memorables.</p>
+      <div class="feature-grid">
+        <article>
+          <h3>Jugabilidad táctil refinada</h3>
+          <ul class="features">
+            <li><span>🧩</span><div><strong>Movimiento preciso</strong><br>Arrastra piezas con animaciones suaves y feedback instantáneo.</div></li>
+            <li><span>⚡</span><div><strong>Pistas dinámicas</strong><br>Destaca los movimientos viables para mantener el ritmo sin frustración.</div></li>
+            <li><span>⏱️</span><div><strong>Temporizador y récords</strong><br>Controla tu mejor tiempo y comparte capturas con tus amistades.</div></li>
+          </ul>
         </article>
-        <article class="card">
-          <div class="thumb ocean">
-            <svg viewBox="0 0 120 90" role="img" aria-labelledby="thumb-ocean-title">
-              <title id="thumb-ocean-title">Miniatura de aventura submarina con peces amistosos</title>
-              <rect width="120" height="90" rx="16" fill="url(#ocean-bg)" />
-              <defs>
-                <linearGradient id="ocean-bg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#9ee7ff" />
-                  <stop offset="100%" stop-color="#6fe3c7" />
-                </linearGradient>
-              </defs>
-              <path d="M0 70 Q30 60 60 70 T120 70 V90 H0 Z" fill="#4cc6c9" opacity="0.65" />
-              <path d="M0 62 Q30 52 60 62 T120 62 V90 H0 Z" fill="#7de0f0" opacity="0.55" />
-              <g fill="#ff9ec0">
-                <ellipse cx="40" cy="48" rx="12" ry="8" />
-                <polygon points="52,48 62,42 62,54" />
-              </g>
-              <circle cx="36" cy="46" r="2" fill="#3c3354" />
-              <path d="M32 50 Q36 52 40 50" stroke="#3c3354" stroke-width="2" fill="none" stroke-linecap="round" />
-              <g fill="#ffd56f">
-                <ellipse cx="76" cy="40" rx="10" ry="7" />
-                <polygon points="86,40 96,34 96,46" />
-              </g>
-              <circle cx="72" cy="38" r="2" fill="#3c3354" />
-              <path d="M68 42 Q72 44 76 42" stroke="#3c3354" stroke-width="2" fill="none" stroke-linecap="round" />
-              <circle cx="30" cy="26" r="6" fill="#fff7d6" opacity="0.8" />
-              <circle cx="90" cy="24" r="8" fill="#fff7d6" opacity="0.8" />
-            </svg>
-            <span class="sticker" aria-hidden="true">🐠</span>
-          </div>
-          <div class="card-body">
-            <h3>Aventuras en el Océano</h3>
-            <p class="muted">Juego simbólico para descubrir criaturas marinas y practicar vocabulario emocional bajo el mar.</p>
-            <p class="muted">PDF imprimible • 28 páginas • 4+</p>
-            <strong class="price">S/ 15.00</strong>
-            <div class="card-actions">
-              <a class="buy" href="https://www.paypal.com/donate/?hosted_button_id=H37DM4ACU3L88" target="_blank" rel="noopener">Comprar</a>
-              <a class="try" href="#contacto">Pedir demo</a>
-            </div>
-          </div>
+        <article>
+          <h3>Progresión que engancha</h3>
+          <ul class="features">
+            <li><span>📈</span><div><strong>Dificultades escalables</strong><br>Tableros 3x3, 4x4 y 5x5 listos para perfiles casuales o expertos.</div></li>
+            <li><span>🏅</span><div><strong>Logros temáticos</strong><br>Desbloquea medallas por rachas perfectas, pocos movimientos o velocidad extrema.</div></li>
+            <li><span>🔁</span><div><strong>Reinicio instantáneo</strong><br>Comienza una nueva partida con un solo toque para intentar una mejor ruta.</div></li>
+          </ul>
         </article>
-        <article class="card">
-          <div class="thumb forest">
-            <svg viewBox="0 0 120 90" role="img" aria-labelledby="thumb-forest-title">
-              <title id="thumb-forest-title">Escena de bosque mágico con animales amistosos</title>
-              <rect width="120" height="90" rx="16" fill="url(#forest-bg)" />
-              <defs>
-                <linearGradient id="forest-bg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#c7c5ff" />
-                  <stop offset="100%" stop-color="#ffe59d" />
-                </linearGradient>
-              </defs>
-              <path d="M14 78 L30 38 L46 78 Z" fill="#8ed081" />
-              <path d="M54 78 L68 34 L82 78 Z" fill="#7cc99a" />
-              <circle cx="86" cy="38" r="14" fill="#ffbf95" />
-              <circle cx="86" cy="36" r="4" fill="#3c3354" />
-              <circle cx="94" cy="36" r="4" fill="#3c3354" />
-              <path d="M86 44 Q90 48 94 44" stroke="#3c3354" stroke-width="3" fill="none" stroke-linecap="round" />
-              <circle cx="60" cy="26" r="8" fill="#ffeef9" opacity="0.8" />
-              <circle cx="32" cy="26" r="6" fill="#ffeef9" opacity="0.8" />
-              <rect x="18" y="70" width="84" height="10" rx="4" fill="#ffffff" opacity="0.6" />
-            </svg>
-            <span class="sticker" aria-hidden="true">🦊</span>
-          </div>
-          <div class="card-body">
-            <h3>Bosque de Sueños</h3>
-            <p class="muted">Cuento interactivo con respiraciones guiadas para acompañar la hora de dormir y bajar revoluciones.</p>
-            <p class="muted">PDF imprimible • 18 páginas • 2+</p>
-            <strong class="price">S/ 10.00</strong>
-            <div class="card-actions">
-              <a class="buy" href="https://www.paypal.com/donate/?hosted_button_id=H37DM4ACU3L88" target="_blank" rel="noopener">Comprar</a>
-              <a class="try" href="#contacto">Recibir guía</a>
-            </div>
-          </div>
+        <article>
+          <h3>Presentación inmersiva</h3>
+          <ul class="features">
+            <li><span>🌌</span><div><strong>Temas galácticos</strong><br>Cambia paletas y fondos para cada constelación o temporada.</div></li>
+            <li><span>🎵</span><div><strong>Audio adaptable</strong><br>Integra música ambiental y efectos sutiles con disparadores por evento.</div></li>
+            <li><span>📱</span><div><strong>Responsive total</strong><br>Juega en móviles, tablets o escritorio sin perder legibilidad.</div></li>
+          </ul>
         </article>
       </div>
     </section>
-    <section class="section about" id="sobre">
-      <div class="panel">
-        <h2>Sobre mí</h2>
-        <p>¡Hola! Soy Sarita Zuñiga, mamá creativa y educadora. Me encanta diseñar cuentos que celebren la curiosidad, inviten a conversar y regalen abrazos extra antes de dormir.</p>
-        <p class="muted">Cada libro incluye sugerencias para acompañar a tu peque según su ritmo y reforzar vínculos en casa o en el aula.</p>
-      </div>
-      <div class="panel">
-        <h2>Compra rápida</h2>
-        <ul>
-          <li>Elige el cuento y haz clic en <strong>Comprar</strong>.</li>
-          <li>Recibe el PDF al instante en tu correo o WhatsApp.</li>
-          <li>Disfruta actividades imprimibles, playlists y tips para guiar la experiencia.</li>
-        </ul>
-        <p class="muted">Si necesitas orientación personalizada, escríbeme y elegimos juntos el recurso ideal.</p>
+
+    <section id="modes">
+      <h2>Modos y desafíos</h2>
+      <p class="lead">Escoge el nivel de reto perfecto y desbloquea variantes especiales al dominar cada galaxia.</p>
+      <ol class="mode-cards">
+        <li>
+          <strong><span>1</span>Modo Clásico</strong>
+          <p>Resuelve tableros 3x3 pensados para introducir mecánicas y practicar rutas óptimas.</p>
+        </li>
+        <li>
+          <strong><span>2</span>Modo Pro</strong>
+          <p>Enfrenta rompecabezas 4x4 y 5x5 con barajados certificados como resolubles y cronómetro competitivo.</p>
+        </li>
+        <li>
+          <strong><span>3</span>Retos Contrarreloj</strong>
+          <p>Completa niveles con límite de tiempo para escalar en la tabla semanal del juego.</p>
+        </li>
+        <li>
+          <strong><span>4</span>Eventos Galácticos</strong>
+          <p>Activa layouts temáticos con piezas bloqueadas, meteoritos sorpresa y misiones de colección.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="updates">
+      <h2>Próximas actualizaciones</h2>
+      <p class="lead">Un vistazo a lo que viene para mantener la experiencia fresca y llena de sorpresas.</p>
+      <ol class="update-list">
+        <li>
+          <strong>Fase 1 · Colección Nebulosa</strong>
+          <p>Nuevo set de tableros con piezas translúcidas, efectos de partículas y desafíos diarios guiados.</p>
+        </li>
+        <li>
+          <strong>Fase 2 · Cooperativo local</strong>
+          <p>Comparte dispositivo para resolver puzzles por turnos, con indicadores de movimientos por persona.</p>
+        </li>
+        <li>
+          <strong>Fase 3 · Editor de niveles</strong>
+          <p>Crea galaxias personalizadas, comparte códigos con la comunidad e integra piezas especiales.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="faq" id="faq">
+      <header>
+        <h2>Preguntas frecuentes</h2>
+        <p class="lead">Resuelve dudas rápidas para potenciar el desarrollo de tu rompecabezas.</p>
+      </header>
+      <div class="faq-list">
+        <article class="faq-card">
+          <h3>¿Cómo añado más niveles y ambientaciones?</h3>
+          <p>Duplica la matriz de piezas en el script, ajusta el tamaño del tablero y define nuevos fondos o sprites en las variables CSS. El motor reorganiza automáticamente los números y valida que cada combinación sea resoluble.</p>
+          <p>Puedes sumar sonidos o ilustraciones importando tus archivos en la sección superior del documento. Todo el flujo funciona con JavaScript puro, por lo que ampliar contenidos no requiere dependencias adicionales.</p>
+        </article>
       </div>
     </section>
-    <section class="section" id="contacto">
-      <h2>Contacto</h2>
-      <p><strong>WhatsApp:</strong> <a href="https://wa.me/51999999999">+51 999 999 999</a></p>
-    </section>
-    <footer>
-      <div class="wrap foot">
-        <div>© <span id="y"></span> Cuentonautas · Hecho con ❤ en Perú</div>
-      </div>
-    </footer>
   </main>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <footer>
+    Puzzle Galaxy · Rompecabezas espacial en desarrollo · Construido con HTML, CSS y JavaScript puro.
+  </footer>
+
+  <script>
+    const boardEl = document.querySelector('.board');
+    const movesEl = document.getElementById('moves');
+    const timeEl = document.getElementById('time');
+    const bestEl = document.getElementById('best');
+    const statusEl = document.querySelector('.status');
+    const difficultySelect = document.querySelector('select');
+    const bestKey = 'puzzle-galaxy-best';
+
+    let size = parseInt(difficultySelect.value, 10);
+    let tiles = [];
+    let emptyIndex = size * size - 1;
+    let moves = 0;
+    let time = 0;
+    let timerId = null;
+
+    function coords(index) {
+      return { row: Math.floor(index / size), col: index % size };
+    }
+
+    function getNeighbors(index) {
+      const { row, col } = coords(index);
+      const neighbors = [];
+      if (row > 0) neighbors.push(index - size);
+      if (row < size - 1) neighbors.push(index + size);
+      if (col > 0) neighbors.push(index - 1);
+      if (col < size - 1) neighbors.push(index + 1);
+      return neighbors;
+    }
+
+    function createSolvedArray() {
+      const arr = [];
+      for (let i = 1; i < size * size; i += 1) {
+        arr.push(i);
+      }
+      arr.push(0);
+      return arr;
+    }
+
+    function shuffleArray() {
+      const arr = createSolvedArray();
+      let empty = arr.length - 1;
+      const iterations = size * size * 50;
+      for (let i = 0; i < iterations; i += 1) {
+        const neighbors = getNeighbors(empty);
+        const pick = neighbors[Math.floor(Math.random() * neighbors.length)];
+        arr[empty] = arr[pick];
+        arr[pick] = 0;
+        empty = pick;
+      }
+      return { arr, empty };
+    }
+
+    function render() {
+      boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+      boardEl.innerHTML = '';
+      tiles.forEach((value, index) => {
+        const tile = document.createElement('button');
+        tile.type = 'button';
+        tile.className = value === 0 ? 'tile empty' : 'tile';
+        tile.dataset.index = index;
+        tile.setAttribute('aria-label', value === 0 ? 'Espacio vacío' : `Ficha ${value}`);
+        if (value !== 0) {
+          tile.textContent = value;
+        }
+        boardEl.appendChild(tile);
+      });
+    }
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const secs = (seconds % 60).toString().padStart(2, '0');
+      return `${mins}:${secs}`;
+    }
+
+    function updateStats() {
+      movesEl.textContent = moves;
+      timeEl.textContent = formatTime(time);
+      const record = getBestTime(size);
+      bestEl.textContent = record ? `${record.moves} mov · ${formatTime(record.time)}` : '--';
+    }
+
+    function startTimer() {
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        time += 1;
+        timeEl.textContent = formatTime(time);
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerId);
+      timerId = null;
+    }
+
+    function setStatus(message, tone = 'info') {
+      const colors = {
+        info: 'var(--muted)',
+        success: 'var(--success)',
+        warning: 'var(--warning)',
+        danger: 'var(--danger)'
+      };
+      statusEl.innerHTML = `<strong style="color:${colors[tone] || colors.info}">${message}</strong>`;
+    }
+
+    function isSolved() {
+      for (let i = 0; i < tiles.length - 1; i += 1) {
+        if (tiles[i] !== i + 1) {
+          return false;
+        }
+      }
+      return tiles[tiles.length - 1] === 0;
+    }
+
+    function saveBestTime(record) {
+      const stored = JSON.parse(localStorage.getItem(bestKey) || '{}');
+      stored[size] = record;
+      localStorage.setItem(bestKey, JSON.stringify(stored));
+    }
+
+    function getBestTime(currentSize) {
+      const stored = JSON.parse(localStorage.getItem(bestKey) || '{}');
+      return stored[currentSize];
+    }
+
+    function maybeUpdateBest() {
+      const record = getBestTime(size);
+      if (!record || time < record.time || (time === record.time && moves < record.moves)) {
+        saveBestTime({ time, moves });
+        setStatus('¡Nuevo récord galáctico! 🎉', 'success');
+      } else {
+        setStatus('Puzzle completado. ¡Sigue escalando posiciones! 🚀', 'success');
+      }
+      updateStats();
+    }
+
+    function resetGame(newSize = size) {
+      size = newSize;
+      const { arr, empty } = shuffleArray();
+      tiles = arr;
+      emptyIndex = empty;
+      moves = 0;
+      time = 0;
+      stopTimer();
+      startTimer();
+      render();
+      updateStats();
+      setStatus('Tablero listo. Desliza las fichas para ordenar de menor a mayor.');
+    }
+
+    function swap(index) {
+      [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
+      emptyIndex = index;
+    }
+
+    function moveTile(index) {
+      if (tiles[index] === 0) return;
+      if (!getNeighbors(index).includes(emptyIndex)) {
+        setStatus('Solo puedes mover fichas junto al espacio vacío.', 'warning');
+        return;
+      }
+      swap(index);
+      moves += 1;
+      render();
+      updateStats();
+      if (isSolved()) {
+        stopTimer();
+        maybeUpdateBest();
+      }
+    }
+
+    function hint() {
+      const neighbors = getNeighbors(emptyIndex).filter((i) => tiles[i] !== 0);
+      const target = neighbors[Math.floor(Math.random() * neighbors.length)];
+      const value = tiles[target];
+      setStatus(`Prueba mover la ficha ${value} hacia el espacio libre.`, 'info');
+    }
+
+    boardEl.addEventListener('click', (event) => {
+      const tile = event.target.closest('.tile');
+      if (!tile) return;
+      const index = Number(tile.dataset.index);
+      moveTile(index);
+    });
+
+    document.body.addEventListener('keydown', (event) => {
+      if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      let target;
+      if (event.key === 'ArrowUp') target = emptyIndex + size;
+      if (event.key === 'ArrowDown') target = emptyIndex - size;
+      if (event.key === 'ArrowLeft') target = emptyIndex + 1;
+      if (event.key === 'ArrowRight') target = emptyIndex - 1;
+      if (target != null && target >= 0 && target < tiles.length) {
+        if (getNeighbors(target).includes(emptyIndex)) {
+          moveTile(target);
+        }
+      }
+    });
+
+    document.querySelector('[data-action="shuffle"]').addEventListener('click', () => {
+      resetGame(size);
+    });
+
+    document.querySelector('[data-action="hint"]').addEventListener('click', () => {
+      hint();
+    });
+
+    difficultySelect.addEventListener('change', (event) => {
+      const newSize = parseInt(event.target.value, 10);
+      resetGame(newSize);
+    });
+
+    resetGame(size);
+  </script>
 </body>
 </html>
